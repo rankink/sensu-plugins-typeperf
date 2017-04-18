@@ -1,0 +1,33 @@
+language: ruby
+cache:
+- bundler
+install:
+- bundle install
+rvm:
+- 1.9.3
+- 2.0
+- 2.1
+- 2.2
+notifications:
+  email:
+    recipients:
+    - sensu-plugin@sensu-plugins.io
+    on_success: change
+    on_failure: always
+script:
+- bundle exec rake default
+- gem build sensu-plugins-typeperf.gemspec
+- gem install sensu-plugins-typeperf-*.gem
+deploy:
+  provider: rubygems
+  api_key:
+    secure: lSRLgsu91vFX4gbLV7A9ERFjUAlCRSkvL3vSlMp1JgkdTqNBW02RdIsBMzRv2dUDEDp1Lzd/OlYzOsiGt1EnumxGzPN4Pqffc0eNOpbUfr5W7ziqzlx+MtCFcKFmToMHbZMO+NE4vPOOerqU29rZev4CDdqyqJVgElKKvcgTjG5UbQYYAUkCnMtTdVee2ogtM6mrLAXybI41GYeqS60WGbk3qIJ/uDwSf57Ak0AD4ELdj9OoFBlVd47c6Z6HxTEORNCGMuFLfJqTKC5EuUj5kz9bAXwDD0NGbkvySffxQbHsDOZE7sQL8tDVYjU1gw44lJ2uR57OLDHJ4ip3n0iUFQ9Qrrmb6nMbOemeV4lHljz4aC9uLCkZ/gKkHV1qOoqLyKPTw1lyfx5HCpFpcWzqQGyfcW90D12FdhSTF1eJsfqAaATpN/08fu+vtXxE81OwYt7u9ijDgsERTa8OSFPAS6jA86idC8+IaSxcZ+l6WDua//M3rXSDFQD+f+Uoh72uMbW3gKE4O2CV+MhyLL/PLYHHvcPPRM5HQSYEXsRMIAYHUTfbrOGmLd/MaScOGBmhEejPZww8IVLe0qa8wQhqxC9oFFh5nGxrnDGhnvYjCm/kTaMUcylS4Lr1447ElD+SlpnNZR2OpFeTDWsEaX99AWq8Lb18+mQCKPYKcG4yUyw=
+  gem: sensu-plugins-typeperf
+  on:
+    tags: true
+    all_branches: true
+    rvm: 1.9.3
+    rvm: 2.0
+    rvm: 2.1
+    rvm: 2.2
+    repo: marana-inc/sensu-plugins-typeperf
